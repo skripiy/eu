@@ -1,0 +1,71 @@
+document.addEventListener('DOMContentLoaded', () => {
+    console.log('JavaScript завантажено успішно!');
+
+    // --- ЗАВДАННЯ 1: Динамічна зміна контенту (Привітання за часом) ---
+    const mainHeader = document.querySelector('h1');
+    if (mainHeader && document.location.pathname.includes('index.html') || document.location.pathname === '/') {
+        const hour = new Date().getHours();
+        let greeting = 'Вітаємо';
+
+        if (hour >= 5 && hour < 12) greeting = 'Доброго ранку';
+        else if (hour >= 12 && hour < 18) greeting = 'Доброго дня';
+        else if (hour >= 18 && hour < 23) greeting = 'Доброго вечора';
+
+        // Змінюємо текст заголовка
+        mainHeader.innerText = `${greeting} на EU.BaseCorp`;
+        // Змінюємо стиль динамічно
+        mainHeader.style.color = '#2c3e50';
+    }
+
+    // --- ЗАВДАННЯ 2: Інтерактив (Конвертер валют) ---
+    // Логіка буде працювати, якщо на сторінці є елементи конвертера
+    const amountInput = document.getElementById('amount');
+    const convertBtn = document.getElementById('convertBtn');
+    const resultDiv = document.getElementById('result');
+
+    if (amountInput && convertBtn && resultDiv) {
+        convertBtn.addEventListener('click', () => {
+            const amount = parseFloat(amountInput.value);
+            const rate = 41.5; // Умовний курс
+            if (!isNaN(amount)) {
+                const uah = (amount * rate).toFixed(2);
+                resultDiv.innerHTML = `<strong>${amount} USD = ${uah} UAH</strong>`;
+                resultDiv.style.color = 'green';
+            } else {
+                resultDiv.innerText = 'Будь ласка, введіть число';
+                resultDiv.style.color = 'red';
+            }
+        });
+    }
+
+    // --- ЗАВДАННЯ 3: Обробка форм (Alert та preventDefault) ---
+    const contactForm = document.querySelector('form');
+    if (contactForm) {
+        contactForm.addEventListener('submit', (e) => {
+            e.preventDefault(); // Зупиняємо стандартну відправку (перезавантаження)
+
+            const name = contactForm.querySelector('input[type="text"]').value;
+
+            if (name.length < 3) {
+                alert('Ім\'я занадто коротке!');
+                return;
+            }
+
+            alert(`Дякуємо, ${name}! Ваше повідомлення "відправлено" (тест JS).`);
+            contactForm.reset();
+        });
+    }
+
+    // --- ЗАВДАННЯ 4: Пасхалка (Зміна фону при кліку на футер) ---
+    // (Можна клікнути внизу сторінки, щоб перевірити роботу подій)
+    const body = document.body;
+    const footer = document.createElement('footer');
+    footer.innerHTML = '<p style="text-align:center; padding: 20px; cursor:pointer; color: #777;">&copy; 2024 EU Lab Work. Click me!</p>';
+    document.body.appendChild(footer);
+
+    footer.addEventListener('click', () => {
+        const randomColor = '#' + Math.floor(Math.random() * 16777215).toString(16);
+        footer.style.backgroundColor = randomColor;
+        footer.querySelector('p').style.color = 'white';
+    });
+});
