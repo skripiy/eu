@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="uk">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Контакти - EU.BaseCorp</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+    <nav>
+        <ul>
+            <li><a href="index.html">Головна</a></li>
+            <li><a href="about.html">Про нас</a></li>
+            <li><a href="schedule.html">Розклад (Таблиці)</a></li>
+            <li><a href="resources.html">Ресурси (Списки)</a></li>
+            <li><a href="gallery.html">Медіа</a></li>
+            <li><a href="contact.html">Контакти</a></li>
+        </ul>
+        <hr>
+    </nav>
+
+    <h1>Зв'яжіться з нами</h1>
+    <p>Заповніть форму нижче, щоб відправити нам повідомлення.</p>
+
+    <form action="/api/contact" method="POST" style="max-width: 500px;">
+        <div style="margin-bottom: 15px;">
+            <label for="name">Ім'я:</label><br>
+            <input type="text" id="name" name="name" required placeholder="Ваше ім'я"
+                style="width: 100%; padding: 8px;">
+        </div>
+
+        <div style="margin-bottom: 15px;">
+            <label for="email">Email:</label><br>
+            <input type="email" id="email" name="email" required placeholder="vashe@email.com"
+                style="width: 100%; padding: 8px;">
+        </div>
+
+        <div style="margin-bottom: 15px;">
+            <label for="message">Повідомлення:</label><br>
+            <textarea id="message" name="message" rows="5" required placeholder="Текст повідомлення..."
+                style="width: 100%; padding: 8px;"></textarea>
+        </div>
+
+        <button type="submit"
+            style="padding: 10px 20px; cursor: pointer; background-color: #007bff; color: white; border: none;">Відправити</button>
+    </form>
+</body>
+
+</html>
