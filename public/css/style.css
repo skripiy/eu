@@ -1,3 +1,164 @@
+/* --- ЗАГАЛЬНІ СТИЛІ (Reset & Base) --- */
 body {
-    font-family: sans-serif;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 0;
+    line-height: 1.6;
+    background-color: #f4f4f9;
+    color: #333;
+}
+
+/* Контейнер для центрування контенту */
+main {
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+    background: white;
+    min-height: 80vh;
+}
+
+/* --- МЕНЮ (Практична №3) --- */
+/* Вимога: прибрати маркери, горизонтальний порядок, реагування на наведення */
+nav {
+    background-color: #333;
+    color: white;
+    padding: 10px 0;
+}
+
+nav ul {
+    list-style-type: none;
+    /* Прибрати маркери */
+    margin: 0;
+    padding: 0;
+    text-align: center;
+}
+
+nav li {
+    display: inline-block;
+    /* Горизонтальний порядок */
+    margin: 0 15px;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    padding: 5px 10px;
+    transition: background-color 0.3s;
+}
+
+/* Ефект при наведенні (Hover) */
+nav a:hover {
+    background-color: #575757;
+    border-radius: 4px;
+}
+
+/* --- ПАРАЛАКС (Практична №6) --- */
+/* Використання background-attachment: fixed */
+.parallax-section {
+    background-image: url('https://images.unsplash.com/photo-1506744038136-46273834b3fb?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80');
+    min-height: 400px;
+    background-attachment: fixed;
+    /* Ключова властивість для ефекту */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.parallax-text {
+    color: white;
+    font-size: 2.5em;
+    font-weight: bold;
+    text-shadow: 2px 2px 4px #000000;
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 20px;
+    border-radius: 10px;
+}
+
+/* --- ТАБЛИЦІ ТА ФОРМИ --- */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+}
+
+th,
+td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+
+th {
+    background-color: #4CAF50;
+    color: white;
+    padding-top: 12px;
+    padding-bottom: 12px;
+}
+
+tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+tr:hover {
+    background-color: #ddd;
+}
+
+input,
+textarea {
+    width: 100%;
+    padding: 12px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 14px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    width: 100%;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+/* --- АДАПТИВНІСТЬ (Практична №7) --- */
+/* Медіа-запит для мобільних пристроїв (ширина менше 768px) */
+@media screen and (max-width: 768px) {
+
+    /* Зміна меню на вертикальне */
+    nav li {
+        display: block;
+        margin: 10px 0;
+    }
+
+    /* Зменшення шрифту паралаксу */
+    .parallax-text {
+        font-size: 1.5em;
+        width: 90%;
+        text-align: center;
+    }
+
+    /* Адаптація контейнера */
+    main {
+        padding: 10px;
+    }
+
+    /* Адаптивні зображення */
+    img,
+    iframe {
+        max-width: 100%;
+        height: auto;
+    }
 }
