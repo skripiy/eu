@@ -38,21 +38,48 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // --- ЗАВДАННЯ 3: Обробка форм (Alert та preventDefault) ---
+    // --- ЗАВДАННЯ 3: Обробка форм (Відправка на сервер) ---
     const contactForm = document.querySelector('form');
     if (contactForm) {
-        contactForm.addEventListener('submit', (e) => {
-            e.preventDefault(); // Зупиняємо стандартну відправку (перезавантаження)
+        contactForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
 
-            const name = contactForm.querySelector('input[type="text"]').value;
+            const nameInput = contactForm.querySelector('input[type="text"]');
+            const emailInput = contactForm.querySelector('input[type="email"]');
+            const msgInput = contactForm.querySelector('textarea');
 
-            if (name.length < 3) {
+            const data = {
+                name: nameInput.value,
+                email: emailInput.value,
+                message: msgInput.value
+            };
+
+            if (data.name.length < 3) {
                 alert('Ім\'я занадто коротке!');
                 return;
             }
 
-            alert(`Дякуємо, ${name}! Ваше повідомлення "відправлено" (тест JS).`);
-            contactForm.reset();
+            try {
+                // Відправляємо POST запит на наш API (через Nginx proxy)
+                const response = await fetch('/api/messages', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(data)
+                });
+
+                if (response.ok) {
+                    const result = await response.json();
+                    alert(`Успіх! Повідомлення збережено в БД під ID: ${result.id}`);
+                    contactForm.reset();
+                } else {
+                    alert('Помилка сервера при збереженні.');
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                alert('Помилка мережі.');
+            }
         });
     }
 
