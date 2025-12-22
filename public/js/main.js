@@ -1,17 +1,25 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // --- ВЛАСНА АНАЛІТИКА ---
+    // --- ПРОСУНУТА АНАЛІТИКА ---
     const trackVisit = async () => {
+        // Генерація або отримання Session ID
+        let sessionId = localStorage.getItem('analytics_session_id');
+        if (!sessionId) {
+            sessionId = 'sess-' + Math.random().toString(36).substr(2, 9) + '-' + Date.now();
+            localStorage.setItem('analytics_session_id', sessionId);
+        }
+
         try {
             await fetch('/api/visit', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
                     page: window.location.pathname,
-                    userAgent: navigator.userAgent
+                    userAgent: navigator.userAgent,
+                    sessionId: sessionId
                 })
             });
         } catch (e) {
-            console.log('Analytics error', e); // Тихо ігноруємо помилки трекінгу
+            console.log('Analytics error', e);
         }
     };
     trackVisit();
