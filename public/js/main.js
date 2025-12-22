@@ -87,7 +87,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // (Можна клікнути внизу сторінки, щоб перевірити роботу подій)
     const body = document.body;
     const footer = document.createElement('footer');
-    footer.innerHTML = '<p style="text-align:center; padding: 20px; cursor:pointer; color: #777;">&copy; 2024 EU Lab Work. Click me!</p>';
+    footer.innerHTML = `<p style="text-align:center; padding: 20px; cursor:pointer; color: #777;">&copy; ${new Date().getFullYear()} EU Lab Work. Click me!</p>`;
     document.body.appendChild(footer);
 
     footer.addEventListener('click', () => {
