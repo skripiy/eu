@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="uk">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Аналітика | EU.BaseCorp</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+    <nav>
+        <ul>
+            <li><a href="index.html">Головна</a></li>
+            <li><a href="stats.html">Аналітика (Admin)</a></li>
+        </ul>
+    </nav>
+
+    <main>
+        <h1>Внутрішня статистика відвідувань</h1>
+
+        <div style="display: flex; gap: 20px; flex-wrap: wrap; margin-top: 30px;">
+            <div
+                style="background: #fff; padding: 20px; border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); flex: 1; min-width: 200px; text-align: center;">
+                <h3 style="margin: 0; color: #7f8c8d;">Всього переглядів</h3>
+                <p id="total-views" style="font-size: 3em; font-weight: bold; color: #2c3e50; margin: 10px 0;">0</p>
+            </div>
+
+            <div
+                style="background: #fff; padding: 20px; border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); flex: 2; min-width: 300px;">
+                <h3 style="margin-top: 0;">Популярні сторінки</h3>
+                <ul id="top-pages" style="list-style: none; padding: 0;">
+                    <li>Завантаження даних...</li>
+                </ul>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // Простий скрипт для завантаження статистики
+        async function loadStats() {
+            try {
+                const response = await fetch('/api/stats');
+                const data = await response.json();
+
+                document.getElementById('total-views').innerText = data.total;
+
+                const list = document.getElementById('top-pages');
+                list.innerHTML = '';
+                data.topPages.forEach(item => {
+                    const li = document.createElement('li');
+                    li.style.padding = '10px';
+                    li.style.borderBottom = '1px solid #eee';
+                    li.style.display = 'flex';
+                    li.style.justifyContent = 'space-between';
+                    li.innerHTML = `<span>${item.page === '/' ? 'Головна (/)' : item.page}</span> <strong>${item.count}</strong>`;
+                    list.appendChild(li);
+                });
+            } catch (e) {
+                console.error(e);
+            }
+        }
+        loadStats();
+    </script>
+</body>
+
+</html>

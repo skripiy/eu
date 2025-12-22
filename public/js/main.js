@@ -1,4 +1,21 @@
 document.addEventListener('DOMContentLoaded', () => {
+    // --- ВЛАСНА АНАЛІТИКА ---
+    const trackVisit = async () => {
+        try {
+            await fetch('/api/visit', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    page: window.location.pathname,
+                    userAgent: navigator.userAgent
+                })
+            });
+        } catch (e) {
+            console.log('Analytics error', e); // Тихо ігноруємо помилки трекінгу
+        }
+    };
+    trackVisit();
+
     console.log('JavaScript завантажено успішно!');
 
     // --- ЗАВДАННЯ 1: Динамічна зміна контенту (Привітання за часом) ---
