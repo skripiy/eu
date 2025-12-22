@@ -56,27 +56,44 @@ nav a:hover {
 /* --- ПАРАЛАКС (Практична №6) --- */
 /* Використання background-attachment: fixed */
 .parallax-section {
-    background-image: url('https://images.unsplash.com/photo-1506744038136-46273834b3fb?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80');
-    min-height: 400px;
+    /* Шлях від папки css до папки img */
+    background-image: url('../img/hero-bg.jpg');
+
+    /* Параметри паралаксу */
+    min-height: 500px;
     background-attachment: fixed;
-    /* Ключова властивість для ефекту */
+    /* ГРУНТОВНИЙ ЕЛЕМЕНТ ЕФЕКТУ */
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
-    position: relative;
+
+    /* Центрування тексту всередині */
     display: flex;
     align-items: center;
     justify-content: center;
+    color: white;
+    text-align: center;
+    position: relative;
 }
 
-.parallax-text {
-    color: white;
-    font-size: 2.5em;
-    font-weight: bold;
-    text-shadow: 2px 2px 4px #000000;
-    background-color: rgba(0, 0, 0, 0.5);
-    padding: 20px;
-    border-radius: 10px;
+/* Додаємо затемнення, щоб текст читався краще */
+.parallax-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    /* Чорний напівпрозорий шар */
+    z-index: 1;
+}
+
+/* Піднімаємо текст над затемненням */
+.parallax-section h1,
+.parallax-section p {
+    position: relative;
+    z-index: 2;
 }
 
 /* --- ТАБЛИЦІ ТА ФОРМИ --- */
